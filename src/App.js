@@ -1,6 +1,5 @@
 import React, { Component, Suspense } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import './scss/style.scss'
 
 const loading = (
@@ -12,39 +11,27 @@ const loading = (
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
+// Pages
+const Login = React.lazy(() => import('./views/pages/login/Login'))
+const Register = React.lazy(() => import('./views/pages/register/Register'))
+const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
+const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
+
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      mssg: 'Dashboard',
-    }
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  static propTypes = {
-    mssg: PropTypes.string,
-  }
-
   render() {
     return (
       <HashRouter>
         <Suspense fallback={loading}>
           <Routes>
-            {this.state.mssg}
-            <Route
-              path="*"
-              name="Home"
-              element={<DefaultLayout mssg={this.state.mssg} handleClick={this.handleClick} />}
-            />
+            <Route exact path="/login" name="Login Page" element={<Login />} />
+            <Route exact path="/register" name="Register Page" element={<Register />} />
+            <Route exact path="/404" name="Page 404" element={<Page404 />} />
+            <Route exact path="/500" name="Page 500" element={<Page500 />} />
+            <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes>
         </Suspense>
       </HashRouter>
     )
-  }
-
-  handleClick = () => {
-    this.setState({ mssg: 'Hi there!' })
-    console.log(this.state.mssg)
   }
 }
 

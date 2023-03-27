@@ -4,25 +4,21 @@ import { useSelector, useDispatch } from 'react-redux'
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
-import { AppSidebarNav2 } from './AppSidebarNav'
+import { AppSidebarNav } from './AppSidebarNav'
 
-import { logoNegative } from 'src/assets/brand/logo-negative'
+import logoNegative from 'src/assets/brand/sd.svg'
 import { sygnet } from 'src/assets/brand/sygnet'
 
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
-import PropTypes from 'prop-types'
 
 // sidebar nav config
-import AppSidebarNav from './AppSidebarNav'
+import navigation from '../_nav'
 
-const AppSidebar = (props) => {
+const AppSidebar = () => {
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
-  AppSidebar.propTypes = {
-    handleClick: PropTypes.func,
-  }
 
   return (
     <CSidebar
@@ -34,12 +30,12 @@ const AppSidebar = (props) => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
+        <img className="sidebar-brand-full" src={logoNegative} height={50} />
+        【神盾】拉格朗日工具
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
-          <AppSidebarNav2 handleClick={props.handleClick} />
+          <AppSidebarNav items={navigation} />
         </SimpleBar>
       </CSidebarNav>
       <CSidebarToggler

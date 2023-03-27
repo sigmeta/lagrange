@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import PropTypes from 'prop-types'
 import {
   CContainer,
   CHeader,
@@ -17,12 +16,11 @@ import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
-import { logo } from 'src/assets/brand/logo'
+import logo from 'src/assets/brand/sd.svg'
 
-const AppHeader = (props) => {
+const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
-  AppHeader.propTypes = { mssg: PropTypes.string }
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -34,21 +32,23 @@ const AppHeader = (props) => {
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand className="mx-auto d-md-none" to="/">
-          <CIcon icon={logo} height={48} alt="Logo" />
+          <img src={logo} height={40} alt="Logo" />
+          【神盾】Tools
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink to="/dashboard" component={NavLink}>
-              {props.mssg}
+              【神盾】拉格朗日工具
             </CNavLink>
+          </CNavItem>
+          <CNavItem>
+            <CNavLink href="#">Users</CNavLink>
+          </CNavItem>
+          <CNavItem>
+            <CNavLink href="#">Settings</CNavLink>
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilBell} size="lg" />
-            </CNavLink>
-          </CNavItem>
           <CNavItem>
             <CNavLink href="#">
               <CIcon icon={cilList} size="lg" />
